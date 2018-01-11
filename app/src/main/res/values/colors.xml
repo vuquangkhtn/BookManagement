@@ -3,4 +3,17 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="black">#ff000000</color>
+    <color name="grey">#ff888888</color>
+    <color name="orange_button">#F27A10</color>
+    <color name="blue_text">#007AFF</color>
+    <color name="grey_arrow">#989898</color>
+    <color name="hot_news">#E75567</color>
+    <color name="marker_selected">#F27A10</color>
+    <color name="marker_normal">#B2B5BC</color>
+    <color name="bg_black_trans">#50000000</color>
+    <color name="red">#ff0000</color>
+    <color name="orange">#F27A10</color>
 </resources>

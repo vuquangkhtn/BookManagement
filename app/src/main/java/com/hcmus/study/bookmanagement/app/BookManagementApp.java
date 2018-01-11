@@ -8,8 +8,6 @@ import com.hcmus.study.bookmanagement.activity.WelcomeActivity;
 import com.hcmus.study.bookmanagement.model.Account;
 import com.hcmus.study.bookmanagement.utils.SharePrefHelper;
 
-import java.io.File;
-
 /**
  * Created by CPU10584-local on 11-Jan-18.
  */
@@ -22,10 +20,6 @@ public class BookManagementApp extends Application {
 //    private Cache mCache;
 
     private Account mAccount;
-
-    private BookManagementApp() {
-
-    }
 
     @Override
     public void onCreate() {
