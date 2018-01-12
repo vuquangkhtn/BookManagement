@@ -8,5 +8,5 @@ public abstract class Topic {
     public String id;
     public String name;
 
-    public abstract void getName();
+    public abstract String getName();
 }

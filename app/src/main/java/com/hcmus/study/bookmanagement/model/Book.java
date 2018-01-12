@@ -9,12 +9,14 @@ import com.hcmus.study.bookmanagement.utils.TopicFactory;
 public class Book {
     public String id;
     public String name;
-    public String title;
-    public String image;
     public String publicYear;
+    public String content;
     public Topic topic;
+
     public Author author;
     public Publisher publisher;
+
+    public boolean isFavor;
 
     public Book getClone() {
         return new Book();

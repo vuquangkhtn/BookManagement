@@ -10,6 +10,9 @@
         <item
             android:id="@+id/nav_author"
             android:title="Author" />
+        <item
+            android:id="@+id/nav_favor"
+            android:title="Favorite" />
     </group>
     <group android:id="@+id/nav_footer">
         <item

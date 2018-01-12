@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:padding="5dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_author_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_15"
+            android:textColor="@color/black"
+            android:singleLine="true"
+            android:text="Michael Field"/>
+        <TextView
+            android:id="@+id/tv_nation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="America"
+            android:singleLine="true" />
+        <TextView
+            android:id="@+id/tv_book_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="16 books"
+            android:singleLine="true" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:padding="8dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_next"/>
+    </LinearLayout>

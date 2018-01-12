@@ -6,10 +6,8 @@ package com.hcmus.study.bookmanagement.model;
 
 public class User {
     public Account account;
-    public BookList bookList;
 
     public User(Account account) {
         this.account = account;
-        this.bookList = new BookList();
     }
 }

@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:orientation="horizontal"
-    android:background="#1BA8FF">
+    android:background="@color/main_blue">
 
     <ImageButton
         android:id="@+id/imv_navi_menu"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="#1BA8FF"
+        android:background="@color/main_blue"
         android:src="@drawable/ic_menu" />
 
     <TextView
@@ -26,6 +26,6 @@
         android:id="@+id/imv_navi_search"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="#1BA8FF"
+        android:background="@color/main_blue"
         android:src="@drawable/ic_search" />
 </LinearLayout>

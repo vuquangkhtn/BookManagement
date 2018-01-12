@@ -10,8 +10,8 @@ package com.hcmus.study.bookmanagement.model;
  */
 
 public class Publisher {
-    public String id;
     public String name;
+    public BookList bookList;
 
     public String getField(FieldStrategy fieldStrategy) {
         return fieldStrategy.getField();

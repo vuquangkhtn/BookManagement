@@ -11,6 +11,7 @@ public class Author {
 
     public String name;
     public String birth;
+    public String nation;
     public BookList bookList;
 
     public Author() {
