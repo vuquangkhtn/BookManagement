@@ -1,10 +1,12 @@
 package com.hcmus.study.bookmanagement.model;
 
+import java.io.Serializable;
+
 /**
  * Created by CPU10584-local on 11-Jan-18.
  */
 
-public class Author {
+public class Author implements Serializable {
 
     public int handle;
     public static int nextHandle = 0;

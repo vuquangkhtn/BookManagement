@@ -1,6 +1,7 @@
 package com.hcmus.study.bookmanagement.adaper;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.hcmus.study.bookmanagement.R;
+import com.hcmus.study.bookmanagement.fragment.MoreInfoFragment;
+import com.hcmus.study.bookmanagement.fragment.ReadModeFragment;
 import com.hcmus.study.bookmanagement.model.Book;
 
 import java.util.List;
@@ -49,6 +52,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
                 } else {
                     book.isFavor = false;
                 }
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                MoreInfoFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), book,"book");
             }
         });
     }

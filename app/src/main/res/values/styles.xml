@@ -20,4 +20,8 @@
         <item name="android:textSize">@dimen/d20</item>
     </style>
 
+    <style name="DialogNoAnimation">
+        <item name="android:windowEnterAnimation">@anim/no_anim</item>
+        <item name="android:windowExitAnimation">@anim/no_anim</item>
+    </style>
 </resources>

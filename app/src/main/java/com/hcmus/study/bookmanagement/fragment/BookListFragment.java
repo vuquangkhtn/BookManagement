@@ -8,36 +8,36 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.hcmus.study.bookmanagement.R;
+import com.hcmus.study.bookmanagement.adaper.BookAdapter;
 import com.hcmus.study.bookmanagement.model.Book;
+import com.hcmus.study.bookmanagement.model.BookList;
 
-/**
- * Created by CPU10584-local on 12-Jan-18.
- */
-
-public class ReadModeFragment extends DialogFragment {
-    private static final String TAG = "ReadModeFragment";
+public class BookListFragment extends DialogFragment {
+    private static final String TAG = "BookListFragment";
 
     ImageView imvBack;
-    TextView tvContent;
+    RecyclerView rvBookList;
 
-    public static void show(FragmentManager fm, Book book) {
-        ReadModeFragment dialog = newInstance(book);
+    BookAdapter mAdapter;
+
+    public static void show(FragmentManager fm, BookList bookList) {
+        BookListFragment dialog = newInstance(bookList);
         dialog.show(fm, TAG);
     }
 
-    private static ReadModeFragment newInstance(Book book) {
+    private static BookListFragment newInstance(BookList bookList) {
         Bundle args = new Bundle();
-        args.putSerializable("data", book);
-        ReadModeFragment dialog = new ReadModeFragment();
+        args.putSerializable("data", bookList);
+        BookListFragment dialog = new BookListFragment();
         dialog.setArguments(args);
         return dialog;
     }
@@ -54,7 +54,7 @@ public class ReadModeFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), R.layout.fragment_read_mode, null);
+        View view = View.inflate(getActivity(), R.layout.fragment_book, null);
         init(view);
         return view;
     }
@@ -72,9 +72,8 @@ public class ReadModeFragment extends DialogFragment {
     private void init(View view) {
 
         Bundle args = getArguments();
-        Book book = (Book) args.getSerializable("data");
-        tvContent = view.findViewById(R.id.tv_content);
-        tvContent.setText(book.content);
+        BookList bookList = (BookList) args.getSerializable("data");
+
         imvBack = (ImageView) view.findViewById(R.id.imv_navi_back);
         imvBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +82,11 @@ public class ReadModeFragment extends DialogFragment {
             }
         });
 
+        rvBookList = (RecyclerView) view.findViewById(R.id.rv_book);
+        rvBookList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mAdapter = new BookAdapter(getContext());
+        rvBookList.setAdapter(mAdapter);
+        mAdapter.setData(bookList.getListBook());
 
     }
 

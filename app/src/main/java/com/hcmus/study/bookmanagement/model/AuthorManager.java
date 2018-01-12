@@ -21,4 +21,13 @@ public class AuthorManager {
     public static Author findObject(int handle){
         return list.get(handle);
     }
+
+    public static Author findObject(Book book) {
+        for (Author author: list.values()) {
+            if(author.bookList.contain(book)) {
+                return author;
+            }
+        }
+        return null;
+    }
 }

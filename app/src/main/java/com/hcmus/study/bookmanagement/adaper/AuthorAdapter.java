@@ -1,12 +1,14 @@
 package com.hcmus.study.bookmanagement.adaper;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hcmus.study.bookmanagement.R;
+import com.hcmus.study.bookmanagement.fragment.MoreInfoFragment;
 import com.hcmus.study.bookmanagement.model.Author;
 
 import java.util.List;
@@ -32,7 +34,13 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorHold
 
     @Override
     public void onBindViewHolder(AuthorHolder holder, int position) {
-
+        final Author author = itemList.get(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MoreInfoFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), author, "author");
+            }
+        });
     }
 
     public int getItemCount() {

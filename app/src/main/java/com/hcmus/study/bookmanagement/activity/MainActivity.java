@@ -23,6 +23,7 @@ import com.hcmus.study.bookmanagement.adaper.BookAdapter;
 import com.hcmus.study.bookmanagement.adaper.TopicAdapter;
 import com.hcmus.study.bookmanagement.app.BookManagementApp;
 import com.hcmus.study.bookmanagement.model.Author;
+import com.hcmus.study.bookmanagement.model.AuthorManager;
 import com.hcmus.study.bookmanagement.model.Book;
 import com.hcmus.study.bookmanagement.model.BookList;
 import com.hcmus.study.bookmanagement.model.Topic;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         rvTopicList.setAdapter(topicAdapter);
         topicAdapter.setData(topicList);
 
+
         loadNavHeader();
 
         setUpNavigationView();
@@ -92,9 +94,23 @@ public class MainActivity extends AppCompatActivity {
 
         bookList = new BookList();//get data
         for (int i=0;i < 10; i++) {
-            bookList.addBook(new Book());
+            Book book = new Book();
+            book.name = "New Book " + i;
+            book.publicYear = String.valueOf(i)+ "/12/2017";
+            book.content = getResources().getString(R.string.content_test);
+            bookList.addBook(book);
         }
 
+        for (int i=0;i < 10; i++) {
+            Author author = new Author();
+            author.name = "Author "+i;
+            author.nation = i%2==0? "Vietnam":"England";
+            author.bookList = bookList.clone();
+            AuthorManager.registerObject(author);
+        }
+
+        //view default
+        setBookView();
     }
 
 
@@ -111,52 +127,59 @@ public class MainActivity extends AppCompatActivity {
         txtName.setText(SharePrefHelper.get().getString("username_pref"));
     }
 
+    public void setBookView() {
+        tvTitle.setText("Book");
+        rvTopicList.setVisibility(View.VISIBLE);
+//                        mViewPager.setCurrentItem(4);
+
+        rvItemList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        bookAdapter = new BookAdapter(this);
+        rvItemList.setAdapter(bookAdapter);
+        bookAdapter.setData(bookList.getListBook());
+    }
+
+    public void setAuthorView() {
+        rvTopicList.setVisibility(View.GONE);
+        tvTitle.setText("Author");
+//                        mViewPager.setCurrentItem(2);
+        rvItemList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        authorAdapter = new AuthorAdapter(this);
+        rvItemList.setAdapter(authorAdapter);
+        authorAdapter.setData(new ArrayList(AuthorManager.list.values()));
+    }
+
+    public void setFavorView() {
+        tvTitle.setText("Favorite");
+        rvTopicList.setVisibility(View.GONE);
+//                        mViewPager.setCurrentItem(4);
+        BookList books = new BookList();
+        for(Book book: bookList.getListBook()) {
+            if(book.isFavor) {
+                books.addBook(book);
+            }
+        }
+
+        rvItemList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        bookAdapter = new BookAdapter(this);
+        rvItemList.setAdapter(bookAdapter);
+        bookAdapter.setData(books.getListBook());
+    }
+
     private void setUpNavigationView() {
-        final Context context = this;
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_book:
-                        tvTitle.setText("Book");
-                        rvTopicList.setVisibility(View.VISIBLE);
-//                        mViewPager.setCurrentItem(4);
-
-                        rvItemList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-                        bookAdapter = new BookAdapter(context);
-                        rvItemList.setAdapter(bookAdapter);
-                        bookAdapter.setData(bookList.getListBook());
+                        setBookView();
                         closeDrawer();
                         return true;
                     case R.id.nav_author:
-                        rvTopicList.setVisibility(View.GONE);
-                        tvTitle.setText("Author");
-//                        mViewPager.setCurrentItem(2);
-                        List<Author> authors = new ArrayList<>();//get data
-                        for (int i=0;i < 10; i++) {
-                            authors.add(new Author());
-                        }
-                        rvItemList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-                        authorAdapter = new AuthorAdapter(context);
-                        rvItemList.setAdapter(authorAdapter);
-                        authorAdapter.setData(authors);
+                        setAuthorView();
                         closeDrawer();
                         return true;
                     case R.id.nav_favor:
-                        tvTitle.setText("Favorite");
-                        rvTopicList.setVisibility(View.GONE);
-//                        mViewPager.setCurrentItem(4);
-                        BookList books = new BookList();
-                        for(Book book: bookList.getListBook()) {
-                            if(book.isFavor) {
-                                books.addBook(book);
-                            }
-                        }
-
-                        rvItemList.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-                        bookAdapter = new BookAdapter(context);
-                        rvItemList.setAdapter(bookAdapter);
-                        bookAdapter.setData(books.getListBook());
+                        setFavorView();
                         closeDrawer();
                         return true;
                     case R.id.nav_sign_out:
