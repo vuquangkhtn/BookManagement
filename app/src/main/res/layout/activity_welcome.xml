@@ -27,14 +27,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/d12"
             android:layout_gravity=""
-            android:text="Quản lý sách với Book Management"
+            android:text="The best app for book management"
             android:textColor="@color/black"
-            android:textSize="@dimen/d20"
+            android:textSize="@dimen/d16"
             android:textStyle="bold" />
         <EditText
             android:id="@+id/user_input"
             android:layout_width="match_parent"
-            android:hint="Tên đăng nhập"
+            android:hint="Username"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/d12" />
         <Button
@@ -43,14 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/d15"
-            android:text="Đăng nhập" />
+            android:text="Login" />
 
         <TextView
             android:id="@+id/tv_create_new_acc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Hoặc đăng ký tài khoản mới"
+            android:text="Register new account"
             android:textColor="@color/blue_text"
             android:textSize="@dimen/d17" />
 
