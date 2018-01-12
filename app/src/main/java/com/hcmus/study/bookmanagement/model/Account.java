@@ -7,5 +7,4 @@ package com.hcmus.study.bookmanagement.model;
 public class Account {
     public String user;
     public String password;
-    public String role;
 }
