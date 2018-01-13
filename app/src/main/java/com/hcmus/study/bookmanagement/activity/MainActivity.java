@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,6 +33,7 @@ import com.hcmus.study.bookmanagement.utils.TopicFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,9 +84,15 @@ public class MainActivity extends AppCompatActivity {
         rvTopicList = findViewById(R.id.rv_listTopic);
         rvTopicList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         topicAdapter = new TopicAdapter(this);
+
         rvTopicList.setAdapter(topicAdapter);
         topicAdapter.setData(topicList);
-
+        topicAdapter.setOnTopicClickListener(new TopicAdapter.OnTopicClickListener() {
+            @Override
+            public void onTopicClicked(Topic topic) {
+                setBookView(topic.type);
+            }
+        });
 
         loadNavHeader();
 
@@ -92,12 +100,14 @@ public class MainActivity extends AppCompatActivity {
 
         //create test data
 
+        Random rand = new Random();
         bookList = new BookList();//get data
         for (int i=0;i < 10; i++) {
             Book book = new Book();
             book.name = "New Book " + i;
             book.publicYear = String.valueOf(i)+ "/12/2017";
             book.content = getResources().getString(R.string.content_test);
+            book.topic = topicFactory.getTopic(arr[rand.nextInt(topicList.size()-1)+1]);
             bookList.addBook(book);
         }
 
@@ -110,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //view default
-        setBookView();
+        setBookView(TopicFactory.TopicType.ALL);
     }
 
 
@@ -127,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         txtName.setText(SharePrefHelper.get().getString("username_pref"));
     }
 
-    public void setBookView() {
+    public void setBookView(TopicFactory.TopicType topicType) {
         tvTitle.setText("Book");
         rvTopicList.setVisibility(View.VISIBLE);
 //                        mViewPager.setCurrentItem(4);
@@ -135,7 +145,20 @@ public class MainActivity extends AppCompatActivity {
         rvItemList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         bookAdapter = new BookAdapter(this);
         rvItemList.setAdapter(bookAdapter);
-        bookAdapter.setData(bookList.getListBook());
+
+        List<Book> books = new ArrayList<>();
+        //filter data
+        if(topicType != TopicFactory.TopicType.ALL) {
+            for(Book book:bookList.getListBook()) {
+                if(book.topic.type == topicType) {
+                    books.add(book);
+                }
+            }
+            bookAdapter.setData(books);
+        } else {
+            bookAdapter.setData(bookList.getListBook());
+        }
+
     }
 
     public void setAuthorView() {
@@ -171,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_book:
-                        setBookView();
+                        setBookView(TopicFactory.TopicType.ALL);
                         closeDrawer();
                         return true;
                     case R.id.nav_author:

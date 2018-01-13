@@ -9,22 +9,34 @@ public class TopicFactory{
     public Topic getTopic(TopicType topicType){
         switch (topicType) {
             case ALL: {
-                return new All();
+                All all = new All();
+                all.getName();
+                return all;
             }
             case SCIENCE: {
-                return new Science();
+                Science science = new Science();
+                science.getName();
+                return science;
             }
             case GUIDE: {
-                return new Guide();
+                Guide guide = new Guide();
+                guide.getName();
+                return guide;
             }
             case COMICS: {
-                return new Comics();
+                Comics comics = new Comics();
+                comics.getName();
+                return comics;
             }
             case JOURNALS: {
-                return new Journals();
+                Journals Journals = new Journals();
+                Journals.getName();
+                return Journals;
             }
             case COOKBOOKS: {
-                return new Cookbooks();
+                Cookbooks Cookbooks = new Cookbooks();
+                Cookbooks.getName();
+                return Cookbooks;
             }
             default: {
                 return null;
@@ -37,6 +49,7 @@ public class TopicFactory{
         @Override
         public String getName() {
             name = "All books";
+            type = TopicType.ALL;
             return name;
         }
     }
@@ -49,6 +62,7 @@ public class TopicFactory{
         @Override
         public String getName() {
             name = "Science";
+            type = TopicType.SCIENCE;
             return name;
         }
     }
@@ -61,6 +75,7 @@ public class TopicFactory{
         @Override
         public String getName() {
             name = "Journals";
+            type = TopicType.JOURNALS;
             return name;
         }
     }
@@ -73,6 +88,7 @@ public class TopicFactory{
         @Override
         public String getName() {
             name = "Guide";
+            type = TopicType.GUIDE;
             return name;
         }
     }
@@ -85,6 +101,7 @@ public class TopicFactory{
         @Override
         public String getName() {
             name = "Cookbooks";
+            type = TopicType.COOKBOOKS;
             return name;
         }
     }
@@ -97,6 +114,7 @@ public class TopicFactory{
         @Override
         public String getName() {
             name = "Comics";
+            type = TopicType.COMICS;
             return name;
         }
     }

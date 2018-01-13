@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.hcmus.study.bookmanagement.R;
 import com.hcmus.study.bookmanagement.fragment.MoreInfoFragment;
 import com.hcmus.study.bookmanagement.fragment.ReadModeFragment;
+import com.hcmus.study.bookmanagement.model.AuthorManager;
 import com.hcmus.study.bookmanagement.model.Book;
 
 import java.util.List;
@@ -39,6 +40,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
     @Override
     public void onBindViewHolder(BookHolder holder, int position) {
         final Book book = itemList.get(position);
+        holder.tvName.setText(book.name);
+        holder.tvAuthor.setText(AuthorManager.findObject(book).name);
+        holder.tvContain.setText(book.content);
         if(book.isFavor) {
             holder.cbFavor.setChecked(true);
         } else {
@@ -80,11 +84,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
     public class BookHolder extends RecyclerView.ViewHolder {
         public TextView tvName;
         public TextView tvAuthor;
-        public TextView tvContent;
+        public TextView tvContain;
         public CheckBox cbFavor;
         public BookHolder(View itemView) {
             super(itemView);
             cbFavor = itemView.findViewById(R.id.cb_star);
+            tvName = itemView.findViewById(R.id.tv_book_name);
+            tvAuthor = itemView.findViewById(R.id.tv_author);
+            tvContain = itemView.findViewById(R.id.tv_contain);
         }
     }
 }

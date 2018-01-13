@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.hcmus.study.bookmanagement.R;
 import com.hcmus.study.bookmanagement.fragment.MoreInfoFragment;
@@ -35,6 +36,9 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorHold
     @Override
     public void onBindViewHolder(AuthorHolder holder, int position) {
         final Author author = itemList.get(position);
+        holder.tvAuthorName.setText(author.name);
+        holder.tvNation.setText(author.nation);
+        holder.tvBookNum.setText(String.valueOf(author.bookList.size()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,8 +61,14 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorHold
     }
 
     public class AuthorHolder extends RecyclerView.ViewHolder {
+        public TextView tvAuthorName;
+        public TextView tvNation;
+        public TextView tvBookNum;
         public AuthorHolder(View itemView) {
             super(itemView);
+            tvAuthorName = itemView.findViewById(R.id.tv_author_name);
+            tvBookNum = itemView.findViewById(R.id.tv_book_num);
+            tvNation = itemView.findViewById(R.id.tv_nation);
         }
     }
 }

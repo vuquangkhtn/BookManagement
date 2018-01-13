@@ -28,6 +28,8 @@ public class ReadModeFragment extends DialogFragment {
 
     ImageView imvBack;
     TextView tvContent;
+    TextView tvTitle;
+    TextView tvSection;
 
     public static void show(FragmentManager fm, Book book) {
         ReadModeFragment dialog = newInstance(book);
@@ -75,6 +77,13 @@ public class ReadModeFragment extends DialogFragment {
         Book book = (Book) args.getSerializable("data");
         tvContent = view.findViewById(R.id.tv_content);
         tvContent.setText(book.content);
+
+        tvTitle = view.findViewById(R.id.tv_title);
+        tvTitle.setText(book.name);
+
+        tvSection = view.findViewById(R.id.tv_section);
+        tvSection.setText(book.name);
+
         imvBack = (ImageView) view.findViewById(R.id.imv_navi_back);
         imvBack.setOnClickListener(new View.OnClickListener() {
             @Override

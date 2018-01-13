@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.hcmus.study.bookmanagement.R;
@@ -21,7 +20,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
     private Context mContext;
     private List<Topic> itemList;
 
-    private AdapterView.OnItemClickListener onItemClickListener;
+    private OnTopicClickListener onTopicClickListener;
 
     public TopicAdapter(Context mContext) {
         this.mContext = mContext;
@@ -35,9 +34,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
 
     @Override
     public void onBindViewHolder(TopicHolder holder, int position) {
-        Topic topic = itemList.get(position);
+        final Topic topic = itemList.get(position);
         holder.tvText.setText(topic.getName());
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onTopicClickListener.onTopicClicked(topic);
+            }
+        });
     }
 
     @Override
@@ -53,8 +57,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
         notifyDataSetChanged();
     }
 
-    public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
+    public void setOnTopicClickListener(OnTopicClickListener onTopicClickListener) {
+        this.onTopicClickListener = onTopicClickListener;
     }
 
     public class TopicHolder extends RecyclerView.ViewHolder {
@@ -66,4 +70,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicHolder>
     }
 
 
+    /**
+     * Created by VuQuang on 13/01/2018.
+     */
+
+    public interface OnTopicClickListener {
+        void onTopicClicked(Topic topic);
+    }
 }
